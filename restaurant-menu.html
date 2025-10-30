@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delicious Bites Menu - Food Ordering Website</title>
+    <!-- Tailwind CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <!-- Montserrat Font -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #f2f7f2;
+        color: #333333;
+      }
+
+      .primary-color {
+        color: #ff5733;
+      }
+
+      .bg-primary-color {
+        background-color: #ff5733;
+      }
+
+      .accent-color {
+        color: #2e86ab;
+      }
+
+      .bg-accent-color {
+        background-color: #2e86ab;
+      }
+
+      .menu-item {
+        transition: all 0.3s ease;
+      }
+
+      .menu-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .banner {
+        background: linear-gradient(135deg, #ff5733 0%, #ff7849 100%);
+      }
+
+      .order-summary-fixed {
+        position: sticky;
+        top: 20px;
+      }
+
+      .quantity-input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+        padding: 0.25rem;
+      }
+
+      .quantity-input:focus {
+        outline: none;
+        border-color: #2e86ab;
+      }
+
+      .review-card {
+        transition: transform 0.2s ease;
+      }
+
+      .review-card:hover {
+        transform: scale(1.02);
+      }
+
+      .tab-button {
+        transition: all 0.3s ease;
+      }
+
+      .tab-button.active {
+        background-color: #ff5733;
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .order-summary-fixed {
+          position: relative;
+          top: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50">
+    <!-- Promotional Banner -->
+    <div class="banner text-white py-3 px-6">
+      <div class="container mx-auto flex items-center justify-center">
+        <i class="fas fa-gift mr-3 text-xl"></i>
+        <p class="text-sm md:text-base font-medium">
+          <span class="font-bold">Special Offer:</span> Get 25% off on your first order! Use code:
+          <span class="font-bold text-orange-600 px-2 py-1 rounded">FOODIE25</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="home.html" class="text-2xl font-bold primary-color">
+          <i class="fas fa-utensils mr-2"></i>Foodie
+        </a>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="home.html" class="hover:text-gray-700 transition duration-200">Home</a>
+          <a href="#" class="hover:text-gray-700 transition duration-200">About</a>
+          <a href="#" class="hover:text-gray-700 transition duration-200">Contact</a>
+        </div>
+        <div class="md:hidden">
+          <button
+            id="mobile-menu-button"
+            class="text-gray-600 hover:text-gray-800 focus:outline-none"
+          >
+            <i class="fas fa-bars fa-2x"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Restaurant Details -->
+    <section class="bg-white shadow-sm">
+      <div class="container mx-auto mt-6 px-6 py-8">
+        <div class="flex flex-col lg:flex-row items-start gap-8">
+          <img
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw0fHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Delicious Bites Restaurant"
+            class="w-full lg:w-1/3 rounded-lg shadow-md object-cover h-64"
+          />
+          <div class="flex-1">
+            <h1 class="text-4xl font-bold primary-color mb-3">Delicious Bites</h1>
+            <p class="text-gray-700 mb-4 text-lg">
+              A cozy Italian restaurant serving authentic and delicious dishes made with fresh
+              ingredients and traditional recipes.
+            </p>
+            <div class="space-y-2 mb-4">
+              <p class="text-gray-600 flex items-center">
+                <i class="fas fa-map-marker-alt mr-2 text-orange-600"></i>
+                <span class="font-medium">123 Main St, Anytown</span>
+              </p>
+              <p class="text-gray-600 flex items-center">
+                <i class="fas fa-utensils mr-2 text-orange-600"></i>
+                <span class="font-medium">Cuisine: Italian</span>
+              </p>
+              <div class="flex items-center">
+                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                <span class="font-bold text-lg">4.5</span>
+                <span class="text-gray-500 ml-1">(120+ ratings)</span>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="bg-accent-color text-white px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300"
+              >
+                <i class="fas fa-phone mr-2"></i>Call Now
+              </button>
+              <button
+                class="bg-gray-200 text-gray-700 px-5 py-2 rounded-full hover:bg-gray-300 transition duration-300"
+              >
+                <i class="fas fa-directions mr-2"></i>Get Directions
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="bg-white border-b">
+      <div class="container mx-auto px-6">
+        <div class="flex space-x-8">
+          <button
+            class="tab-button active py-4 px-6 font-semibold border-b-2 border-transparent"
+            data-tab="menu"
+          >
+            <i class="fas fa-utensils mr-2"></i>Menu
+          </button>
+          <button
+            class="tab-button py-4 px-6 font-semibold border-b-2 border-transparent hover:text-orange-600"
+            data-tab="reviews"
+          >
+            <i class="fas fa-star mr-2"></i>Reviews
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-8 px-6">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Menu Content -->
+        <main id="menu-content" class="flex-1">
+          <!-- Appetizers -->
+          <section id="appetizers" class="mb-10">
+            <h2 class="text-3xl font-bold accent-color mb-6 flex items-center">
+              <i class="fas fa-leaf mr-3"></i>Appetizers
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Appetizer Item 1 -->
+              <div
+                class="menu-item bg-white rounded-lg shadow-md p-5 hover:shadow-xl"
+                data-name="Bruschetta"
+                data-price="8.99"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=800"
+                  alt="Bruschetta"
+                  class="w-full h-48 object-cover rounded-md mb-3"
+                />
+                <h3 class="text-xl font-semibold mb-2">Bruschetta</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                  Toasted bread topped with fresh tomatoes, basil, garlic, and balsamic glaze.
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-2xl font-bold primary-color">$8.99</span>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="quantity-btn minus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+                    <input type="number" value="1" min="1" class="quantity-input" readonly />
+                    <button
+                      class="quantity-btn plus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+                    <button
+                      class="add-to-cart bg-primary-color hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                    >
+                      <i class="fas fa-cart-plus mr-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="menu-item bg-white rounded-lg shadow-md p-5 hover:shadow-xl"
+                data-name="Mozzarella Sticks"
+                data-price="7.99"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1531749668029-2db88e4276c7?w=800"
+                  alt="Mozzarella Sticks"
+                  class="w-full h-48 object-cover rounded-md mb-3"
+                />
+                <h3 class="text-xl font-semibold mb-2">Mozzarella Sticks</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                  Crispy deep-fried mozzarella sticks served with homemade marinara sauce.
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-2xl font-bold primary-color">$7.99</span>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="quantity-btn minus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+                    <input type="number" value="1" min="1" class="quantity-input" readonly />
+                    <button
+                      class="quantity-btn plus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+                    <button
+                      class="add-to-cart bg-primary-color hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                    >
+                      <i class="fas fa-cart-plus mr-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Appetizer Item 4 -->
+              <div
+                class="menu-item bg-white rounded-lg shadow-md p-5 hover:shadow-xl"
+                data-name="Caprese Salad"
+                data-price="9.99"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=800"
+                  alt="Caprese Salad"
+                  class="w-full h-48 object-cover rounded-md mb-3"
+                />
+                <h3 class="text-xl font-semibold mb-2">Caprese Salad</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                  Fresh mozzarella, tomatoes, and basil drizzled with balsamic reduction.
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-2xl font-bold primary-color">$9.99</span>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="quantity-btn minus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+                    <input type="number" value="1" min="1" class="quantity-input" readonly />
+                    <button
+                      class="quantity-btn plus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+                    <button
+                      class="add-to-cart bg-primary-color hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                    >
+                      <i class="fas fa-cart-plus mr-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Main Courses -->
+          <section id="main-courses" class="mb-10">
+            <h2 class="text-3xl font-bold accent-color mb-6 flex items-center">
+              <i class="fas fa-pizza-slice mr-3"></i>Main Courses
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Main Course Item 1 -->
+              <div
+                class="menu-item bg-white rounded-lg shadow-md p-5 hover:shadow-xl"
+                data-name="Pasta Carbonara"
+                data-price="14.99"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800"
+                  alt="Pasta Carbonara"
+                  class="w-full h-48 object-cover rounded-md mb-3"
+                />
+                <h3 class="text-xl font-semibold mb-2">Pasta Carbonara</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                  Classic spaghetti with eggs, crispy pancetta, Parmesan cheese, and black pepper.
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-2xl font-bold primary-color">$14.99</span>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="quantity-btn minus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+                    <input type="number" value="1" min="1" class="quantity-input" readonly />
+                    <button
+                      class="quantity-btn plus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+                    <button
+                      class="add-to-cart bg-primary-color hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                    >
+                      <i class="fas fa-cart-plus mr-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Course Item 2 -->
+              <div
+                class="menu-item bg-white rounded-lg shadow-md p-5 hover:shadow-xl"
+                data-name="Margherita Pizza"
+                data-price="13.99"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800"
+                  alt="Margherita Pizza"
+                  class="w-full h-48 object-cover rounded-md mb-3"
+                />
+                <h3 class="text-xl font-semibold mb-2">Margherita Pizza</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                  Traditional pizza with fresh mozzarella, tomato sauce, and basil leaves.
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-2xl font-bold primary-color">$13.99</span>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="quantity-btn minus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+                    <input type="number" value="1" min="1" class="quantity-input" readonly />
+                    <button
+                      class="quantity-btn plus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+                    <button
+                      class="add-to-cart bg-primary-color hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                    >
+                      <i class="fas fa-cart-plus mr-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Course Item 3 -->
+              <div
+                class="menu-item bg-white rounded-lg shadow-md p-5 hover:shadow-xl"
+                data-name="Chicken Parmesan"
+                data-price="16.99"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=800"
+                  alt="Chicken Parmesan"
+                  class="w-full h-48 object-cover rounded-md mb-3"
+                />
+                <h3 class="text-xl font-semibold mb-2">Chicken Parmesan</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                  Breaded chicken breast topped with marinara sauce and melted mozzarella.
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-2xl font-bold primary-color">$16.99</span>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="quantity-btn minus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+                    <input type="number" value="1" min="1" class="quantity-input" readonly />
+                    <button
+                      class="quantity-btn plus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+                    <button
+                      class="add-to-cart bg-primary-color hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                    >
+                      <i class="fas fa-cart-plus mr-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Course Item 4 -->
+              <div
+                class="menu-item bg-white rounded-lg shadow-md p-5 hover:shadow-xl"
+                data-name="Lasagna Bolognese"
+                data-price="15.99"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=800"
+                  alt="Lasagna"
+                  class="w-full h-48 object-cover rounded-md mb-3"
+                />
+                <h3 class="text-xl font-semibold mb-2">Lasagna Bolognese</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                  Layered pasta with rich meat sauce, béchamel, and melted cheese.
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-2xl font-bold primary-color">$15.99</span>
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="quantity-btn minus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+                    <input type="number" value="1" min="1" class="quantity-input" readonly />
+                    <button
+                      class="quantity-btn plus bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+                    <button
+                      class="add-to-cart bg-primary-color hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                    >
+                      <i class="fas fa-cart-plus mr-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- Reviews Content (Hidden by default) -->
+        <main id="reviews-content" class="flex-1 hidden">
+          <h2 class="text-3xl font-bold accent-color mb-6">Customer Reviews</h2>
+
+          <!-- Overall Rating Summary -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+              <div>
+                <div class="flex items-center mb-2">
+                  <span class="text-5xl font-bold primary-color mr-3">4.5</span>
+                  <div>
+                    <div class="flex text-yellow-500 text-xl mb-1">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600">Based on 120+ reviews</p>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="bg-accent-color text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300"
+              >
+                <i class="fas fa-pen mr-2"></i>Write a Review
+              </button>
+            </div>
+          </div>
+
+          <!-- Individual Reviews -->
+          <div class="space-y-4">
+            <!-- Review 1 -->
+            <div class="review-card bg-white rounded-lg shadow-md p-6">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center">
+                  <div
+                    class="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-orange-600 font-bold text-lg">SM</span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-lg">Sarah Mitchell</h4>
+                    <p class="text-gray-500 text-sm">2 weeks ago</p>
+                  </div>
+                </div>
+                <div class="flex text-yellow-500">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <p class="text-gray-700 leading-relaxed">
+                Absolutely amazing! The pasta carbonara was cooked to perfection and the tiramisu
+                was the best I've ever had. The atmosphere is cozy and authentic, and the staff were
+                incredibly friendly. Will definitely be coming back!
+              </p>
+              <div class="flex gap-2 mt-3">
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
+                  >Pasta Carbonara</span
+                >
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
+                  >Tiramisu</span
+                >
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-card bg-white rounded-lg shadow-md p-6">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center">
+                  <div
+                    class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-blue-600 font-bold text-lg">JD</span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-lg">James Davidson</h4>
+                    <p class="text-gray-500 text-sm">1 month ago</p>
+                  </div>
+                </div>
+                <div class="flex text-yellow-500">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <p class="text-gray-700 leading-relaxed">
+                Great Italian food with generous portions! The Margherita pizza had a perfect thin
+                crust and fresh ingredients. Service was quick despite being busy. Only minor issue
+                was it got a bit noisy during peak hours, but that's to be expected at a popular
+                spot.
+              </p>
+              <div class="flex gap-2 mt-3">
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
+                  >Margherita Pizza</span
+                >
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-card bg-white rounded-lg shadow-md p-6">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center">
+                  <div
+                    class="w-12 h-12 bg-purple-200 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-purple-600 font-bold text-lg">EC</span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-lg">Emily Chen</h4>
+                    <p class="text-gray-500 text-sm">3 weeks ago</p>
+                  </div>
+                </div>
+                <div class="flex text-yellow-500">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <p class="text-gray-700 leading-relaxed">
+                My family and I had a wonderful dinner here! The lasagna was rich and flavorful, and
+                the bruschetta appetizer was so fresh. The staff made excellent recommendations and
+                were very attentive. This has become our go-to Italian restaurant!
+              </p>
+              <div class="flex gap-2 mt-3">
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
+                  >Lasagna</span
+                >
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
+                  >Bruschetta</span
+                >
+              </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="review-card bg-white rounded-lg shadow-md p-6">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center">
+                  <div
+                    class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-green-600 font-bold text-lg">MR</span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-lg">Michael Rodriguez</h4>
+                    <p class="text-gray-500 text-sm">5 days ago</p>
+                  </div>
+                </div>
+                <div class="flex text-yellow-500">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+              <p class="text-gray-700 leading-relaxed">
+                Authentic Italian cuisine at its finest! The chicken parmesan was perfectly breaded
+                and the sauce was homemade - you can really taste the difference. Prices are very
+                reasonable for the quality. Don't skip dessert - the cannoli are incredible!
+              </p>
+              <div class="flex gap-2 mt-3">
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
+                  >Chicken Parmesan</span
+                >
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
+                  >Cannoli</span
+                >
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Order Summary Sidebar -->
+        <aside class="lg:w-96">
+          <div class="order-summary-fixed bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold accent-color mb-4 flex items-center">
+              <i class="fas fa-shopping-cart mr-2"></i>Your Order
+            </h2>
+            <div id="cart-items" class="space-y-3 mb-4 max-h-64 overflow-y-auto">
+              <p class="text-gray-500 text-center py-8">No items in your cart yet</p>
+            </div>
+            <div class="border-t pt-4">
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-600">Subtotal:</span>
+                <span class="font-semibold" id="subtotal">$0.00</span>
+              </div>
+              <div class="flex justify-between mb-2">
+                <span class="text-gray-600">Tax (8%):</span>
+                <span class="font-semibold" id="tax">$0.00</span>
+              </div>
+              <div class="flex justify-between mb-4 text-lg">
+                <span class="font-bold">Total:</span>
+                <span class="font-bold primary-color" id="total">$0.00</span>
+              </div>
+              <button
+                id="checkout-btn"
+                class="bg-accent-color hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full w-full transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                disabled
+              >
+                <i class="fas fa-credit-card mr-2"></i>Proceed to Checkout
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8 mt-12">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-gray-600">&copy; 2024 Foodie. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Cart functionality
+      let cart = [];
+
+      // Tab switching
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const menuContent = document.getElementById("menu-content");
+      const reviewsContent = document.getElementById("reviews-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const tab = this.dataset.tab;
+
+          // Update active state
+          tabButtons.forEach((btn) => {
+            btn.classList.remove("active", "border-orange-600");
+            btn.classList.add("border-transparent");
+          });
+          this.classList.add("active", "border-orange-600");
+          this.classList.remove("border-transparent");
+
+          // Show/hide content
+          if (tab === "menu") {
+            menuContent.classList.remove("hidden");
+            reviewsContent.classList.add("hidden");
+          } else {
+            menuContent.classList.add("hidden");
+            reviewsContent.classList.remove("hidden");
+          }
+        });
+      });
+
+      // Quantity controls
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        const minusBtn = item.querySelector(".minus");
+        const plusBtn = item.querySelector(".plus");
+        const quantityInput = item.querySelector(".quantity-input");
+
+        minusBtn.addEventListener("click", () => {
+          let value = parseInt(quantityInput.value);
+          if (value > 1) {
+            quantityInput.value = value - 1;
+          }
+        });
+
+        plusBtn.addEventListener("click", () => {
+          let value = parseInt(quantityInput.value);
+          quantityInput.value = value + 1;
+        });
+      });
+
+      // Add to cart functionality
+      document.querySelectorAll(".add-to-cart").forEach((button) => {
+        button.addEventListener("click", function () {
+          const menuItem = this.closest(".menu-item");
+          const name = menuItem.dataset.name;
+          const price = parseFloat(menuItem.dataset.price);
+          const quantity = parseInt(menuItem.querySelector(".quantity-input").value);
+
+          // Check if item already in cart
+          const existingItem = cart.find((item) => item.name === name);
+          if (existingItem) {
+            existingItem.quantity += quantity;
+          } else {
+            cart.push({ name, price, quantity });
+          }
+
+          // Reset quantity to 1
+          menuItem.querySelector(".quantity-input").value = 1;
+
+          // Show feedback
+          this.innerHTML = '<i class="fas fa-check mr-1"></i>Added!';
+          this.classList.add("bg-green-500");
+          this.classList.remove("bg-primary-color");
+
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-cart-plus mr-1"></i>Add';
+            this.classList.remove("bg-green-500");
+            this.classList.add("bg-primary-color");
+          }, 1000);
+
+          updateCart();
+        });
+      });
+
+      function updateCart() {
+        const cartItemsContainer = document.getElementById("cart-items");
+        const subtotalElement = document.getElementById("subtotal");
+        const taxElement = document.getElementById("tax");
+        const totalElement = document.getElementById("total");
+        const checkoutBtn = document.getElementById("checkout-btn");
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML =
+            '<p class="text-gray-500 text-center py-8">No items in your cart yet</p>';
+          subtotalElement.textContent = "$0.00";
+          taxElement.textContent = "$0.00";
+          totalElement.textContent = "$0.00";
+          checkoutBtn.disabled = true;
+          return;
+        }
+
+        // Update cart items
+        cartItemsContainer.innerHTML = cart
+          .map(
+            (item, index) => `
+                <div class="flex justify-between items-center bg-gray-50 p-3 rounded">
+                    <div class="flex-1">
+                        <p class="font-semibold text-sm">${item.name}</p>
+                        <p class="text-xs text-gray-600">${item.price.toFixed(2)} × ${
+              item.quantity
+            }</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-semibold primary-color">${(
+                          item.price * item.quantity
+                        ).toFixed(2)}</span>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">
+                            <i class="fas fa-trash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+
+        // Calculate totals
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const tax = subtotal * 0.08;
+        const total = subtotal + tax;
+
+        subtotalElement.textContent = `${subtotal.toFixed(2)}`;
+        taxElement.textContent = `${tax.toFixed(2)}`;
+        totalElement.textContent = `${total.toFixed(2)}`;
+        checkoutBtn.disabled = false;
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+      }
+
+      // Checkout button
+      document.getElementById("checkout-btn").addEventListener("click", function () {
+        if (cart.length > 0) {
+          alert(
+            "Proceeding to checkout...\n\nYour order:\n" +
+              cart.map((item) => `${item.name} × ${item.quantity}`).join("\n") +
+              "\n\nTotal: " +
+              document.getElementById("total").textContent,
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

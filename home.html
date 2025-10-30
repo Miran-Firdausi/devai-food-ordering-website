@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Ordering Website - Home</title>
+    <!-- Tailwind CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <!-- Montserrat Font -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #f2f7f2;
+        color: #333333;
+      }
+
+      .primary-color {
+        color: #ff5733;
+      }
+
+      .bg-primary-color {
+        background-color: #ff5733;
+      }
+
+      .accent-color {
+        color: #2e86ab;
+      }
+
+      .bg-accent-color {
+        background-color: #2e86ab;
+      }
+
+      .restaurant-card {
+        transition: all 0.3s ease-in-out;
+      }
+
+      .restaurant-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .search-bar {
+        border: 2px solid #ddd;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .search-bar:focus {
+        border-color: #2e86ab;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+      }
+
+      .banner {
+        background: linear-gradient(135deg, #ff5733 0%, #ff7849 100%);
+        animation: slideDown 0.5s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .hidden-card {
+        display: none;
+      }
+
+      .no-results {
+        display: none;
+        text-align: center;
+        padding: 3rem;
+      }
+
+      .no-results.show {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50">
+    <!-- Promotional Banner -->
+    <div class="banner text-white py-3 px-6">
+      <div class="container mx-auto flex items-center justify-center">
+        <i class="fas fa-gift mr-3 text-xl"></i>
+        <p class="text-sm md:text-base font-medium">
+          <span class="font-bold">Special Offer:</span> Get 25% off on your first order! Use code:
+          <span class="font-bold text-orange-600 px-2 py-1 rounded">FOODIE25</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <nav class="container mx-auto py-4 px-6 flex items-center justify-between">
+        <a href="#" class="text-2xl font-bold primary-color">
+          <i class="fas fa-utensils mr-2"></i>Foodie
+        </a>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#" class="hover:text-gray-700 transition duration-200">Home</a>
+          <a href="#" class="hover:text-gray-700 transition duration-200">About</a>
+          <a href="#" class="hover:text-gray-700 transition duration-200">Contact</a>
+          <a
+            href="#"
+            class="bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+            >Order Now</a
+          >
+        </div>
+        <div class="md:hidden">
+          <button
+            id="mobile-menu-button"
+            class="text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800"
+          >
+            <i class="fas fa-bars fa-2x"></i>
+          </button>
+        </div>
+      </nav>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-gray-50 py-4 px-6">
+        <a href="#" class="block py-2 hover:text-gray-700">Home</a>
+        <a href="#" class="block py-2 hover:text-gray-700">About</a>
+        <a href="#" class="block py-2 hover:text-gray-700">Contact</a>
+        <a
+          href="#"
+          class="block py-2 bg-primary-color text-white text-center rounded-full hover:bg-orange-600 transition duration-300"
+          >Order Now</a
+        >
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-8 px-6">
+      <!-- Search Bar -->
+      <div class="mb-8">
+        <div class="relative max-w-2xl mx-auto">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <i class="fas fa-search text-gray-500"></i>
+          </div>
+          <input
+            type="search"
+            id="restaurant-search"
+            class="search-bar block w-full p-4 pl-12 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white"
+            placeholder="Search by restaurant name, cuisine, or location..."
+            autocomplete="off"
+          />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+            <button
+              id="clear-search"
+              class="hidden text-gray-400 hover:text-gray-600"
+              title="Clear search"
+            >
+              <i class="fas fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <p class="text-center text-sm text-gray-500 mt-2">
+          <span id="result-count">6</span> restaurants found
+        </p>
+      </div>
+
+      <!-- Restaurant Listing -->
+      <section id="restaurant-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Restaurant Card 1 -->
+        <article
+          class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden"
+          data-name="Delicious Bites"
+          data-cuisine="Italian"
+          data-location="123 Main St, Anytown"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw0fHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Restaurant 1"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">Delicious Bites</h3>
+            <p class="text-gray-600">
+              <i class="fas fa-map-marker-alt mr-1"></i>123 Main St, Anytown
+            </p>
+            <p class="text-gray-600"><i class="fas fa-utensils mr-1"></i>Cuisine: Italian</p>
+            <div class="flex items-center mt-2">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              <span class="font-medium">4.5</span>
+              <span class="text-gray-500 text-sm ml-1">(120+ ratings)</span>
+            </div>
+            <a
+              href="restaurant-menu.html"
+              class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+              >View Menu</a
+            >
+          </div>
+        </article>
+
+        <!-- Restaurant Card 2 -->
+        <article
+          class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden"
+          data-name="Spicy Delights"
+          data-cuisine="Mexican"
+          data-location="456 Oak Ave, Anytown"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwyfHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Restaurant 2"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">Spicy Delights</h3>
+            <p class="text-gray-600">
+              <i class="fas fa-map-marker-alt mr-1"></i>456 Oak Ave, Anytown
+            </p>
+            <p class="text-gray-600"><i class="fas fa-utensils mr-1"></i>Cuisine: Mexican</p>
+            <div class="flex items-center mt-2">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              <span class="font-medium">4.2</span>
+              <span class="text-gray-500 text-sm ml-1">(90+ ratings)</span>
+            </div>
+            <a
+              href="restaurant-menu.html"
+              class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+              >View Menu</a
+            >
+          </div>
+        </article>
+
+        <!-- Restaurant Card 3 -->
+        <article
+          class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden"
+          data-name="Sushi Time"
+          data-cuisine="Japanese"
+          data-location="789 Pine Ln, Anytown"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwzfHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Restaurant 3"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">Sushi Time</h3>
+            <p class="text-gray-600">
+              <i class="fas fa-map-marker-alt mr-1"></i>789 Pine Ln, Anytown
+            </p>
+            <p class="text-gray-600"><i class="fas fa-utensils mr-1"></i>Cuisine: Japanese</p>
+            <div class="flex items-center mt-2">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              <span class="font-medium">4.8</span>
+              <span class="text-gray-500 text-sm ml-1">(150+ ratings)</span>
+            </div>
+            <a
+              href="restaurant-menu.html"
+              class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+              >View Menu</a
+            >
+          </div>
+        </article>
+
+        <!-- Restaurant Card 4 -->
+        <article
+          class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden"
+          data-name="Burger Place"
+          data-cuisine="American"
+          data-location="101 Elm St, Anytown"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw1fHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Restaurant 4"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">Burger Place</h3>
+            <p class="text-gray-600">
+              <i class="fas fa-map-marker-alt mr-1"></i>101 Elm St, Anytown
+            </p>
+            <p class="text-gray-600"><i class="fas fa-utensils mr-1"></i>Cuisine: American</p>
+            <div class="flex items-center mt-2">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              <span class="font-medium">4.0</span>
+              <span class="text-gray-500 text-sm ml-1">(80+ ratings)</span>
+            </div>
+            <a
+              href="restaurant-menu.html"
+              class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+              >View Menu</a
+            >
+          </div>
+        </article>
+
+        <!-- Restaurant Card 5 -->
+        <article
+          class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden"
+          data-name="Green Garden"
+          data-cuisine="Vegetarian"
+          data-location="222 Maple Dr, Anytown"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw0fHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Restaurant 5"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">Green Garden</h3>
+            <p class="text-gray-600">
+              <i class="fas fa-map-marker-alt mr-1"></i>222 Maple Dr, Anytown
+            </p>
+            <p class="text-gray-600"><i class="fas fa-utensils mr-1"></i>Cuisine: Vegetarian</p>
+            <div class="flex items-center mt-2">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              <span class="font-medium">4.6</span>
+              <span class="text-gray-500 text-sm ml-1">(110+ ratings)</span>
+            </div>
+            <a
+              href="restaurant-menu.html"
+              class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+              >View Menu</a
+            >
+          </div>
+        </article>
+
+        <!-- Restaurant Card 6 -->
+        <article
+          class="restaurant-card bg-white rounded-lg shadow-md overflow-hidden"
+          data-name="Pasta Paradise"
+          data-cuisine="Italian"
+          data-location="333 Cherry St, Anytown"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwzfHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Restaurant 6"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">Pasta Paradise</h3>
+            <p class="text-gray-600">
+              <i class="fas fa-map-marker-alt mr-1"></i>333 Cherry St, Anytown
+            </p>
+            <p class="text-gray-600"><i class="fas fa-utensils mr-1"></i>Cuisine: Italian</p>
+            <div class="flex items-center mt-2">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              <span class="font-medium">4.3</span>
+              <span class="text-gray-500 text-sm ml-1">(100+ ratings)</span>
+            </div>
+            <a
+              href="restaurant-menu.html"
+              class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300"
+              >View Menu</a
+            >
+          </div>
+        </article>
+      </section>
+
+      <!-- No Results Message -->
+      <div id="no-results" class="no-results">
+        <i class="fas fa-search text-gray-300 text-6xl mb-4"></i>
+        <h3 class="text-2xl font-semibold text-gray-700 mb-2">No restaurants found</h3>
+        <p class="text-gray-500">Try searching with different keywords</p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8 mt-12">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-gray-600">&copy; 2024 Foodie. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", function (event) {
+          if (
+            !mobileMenu.contains(event.target) &&
+            !mobileMenuButton.contains(event.target) &&
+            !mobileMenu.classList.contains("hidden")
+          ) {
+            mobileMenu.classList.add("hidden");
+          }
+        });
+
+        mobileMenu.addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById("restaurant-search");
+        const clearButton = document.getElementById("clear-search");
+        const restaurantCards = document.querySelectorAll(".restaurant-card");
+        const noResults = document.getElementById("no-results");
+        const resultCount = document.getElementById("result-count");
+
+        function performSearch() {
+          const searchTerm = searchInput.value.toLowerCase().trim();
+          let visibleCount = 0;
+
+          restaurantCards.forEach((card) => {
+            const name = card.dataset.name.toLowerCase();
+            const cuisine = card.dataset.cuisine.toLowerCase();
+            const location = card.dataset.location.toLowerCase();
+
+            const matches =
+              name.includes(searchTerm) ||
+              cuisine.includes(searchTerm) ||
+              location.includes(searchTerm);
+
+            if (matches || searchTerm === "") {
+              card.classList.remove("hidden-card");
+              visibleCount++;
+            } else {
+              card.classList.add("hidden-card");
+            }
+          });
+
+          // Update result count
+          resultCount.textContent = visibleCount;
+
+          // Show/hide no results message
+          if (visibleCount === 0 && searchTerm !== "") {
+            noResults.classList.add("show");
+          } else {
+            noResults.classList.remove("show");
+          }
+
+          // Show/hide clear button
+          if (searchTerm !== "") {
+            clearButton.classList.remove("hidden");
+          } else {
+            clearButton.classList.add("hidden");
+          }
+        }
+
+        searchInput.addEventListener("input", performSearch);
+
+        clearButton.addEventListener("click", function () {
+          searchInput.value = "";
+          performSearch();
+          searchInput.focus();
+        });
+
+        // Allow clearing with Escape key
+        searchInput.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            searchInput.value = "";
+            performSearch();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
