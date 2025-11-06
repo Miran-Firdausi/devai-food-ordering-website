@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Ordering Website - Home</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Roboto Font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #2C3E50;
+        }
+
+        .primary-color {
+            color: #FF5733;
+        }
+
+        .bg-primary-color {
+            background-color: #FF5733;
+        }
+
+        .accent-color {
+            color: #3498DB;
+        }
+
+        .bg-accent-color {
+            background-color: #3498DB;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto py-4 px-6 flex items-center justify-between">
+            <div class="text-2xl font-bold primary-color">
+                <i class="fas fa-utensils mr-2"></i>Foodie
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="hover:text-gray-700">Home</a>
+                <a href="restaurant-menu.html" class="hover:text-gray-700">Restaurants</a>
+                <a href="#" class="hover:text-gray-700">About Us</a>
+                <a href="#" class="hover:text-gray-700">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800">
+                    <i class="fas fa-bars fa-2x"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="bg-gray-50 py-4 px-6 flex flex-col space-y-4">
+                <a href="#" class="hover:text-gray-700">Home</a>
+                <a href="restaurant-menu.html" class="hover:text-gray-700">Restaurants</a>
+                <a href="#" class="hover:text-gray-700">About Us</a>
+                <a href="#" class="hover:text-gray-700">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4 primary-color">Delicious Food, Delivered Fast</h1>
+            <p class="text-lg text-gray-700 mb-8">Order from your favorite restaurants and enjoy quick, reliable delivery.</p>
+            <img src="https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwxfHxkZWxpdmVyeXxlbnwwfHx8fDE3NjE4MDgxNjh8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Food Delivery" class="rounded-lg shadow-md mx-auto mb-8" style="max-width: 800px;">
+            <a href="restaurant-menu.html" class="bg-accent-color text-white py-3 px-6 rounded-full hover:bg-blue-600 transition duration-300">
+                Order Now <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="bg-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                <div class="w-full md:w-1/2 mb-4 md:mb-0">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <i class="fas fa-search text-gray-500"></i>
+                        </div>
+                        <input type="search" id="restaurant-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search restaurants or cuisine...">
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <select class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option>Cuisine</option>
+                        <option>Italian</option>
+                        <option>Mexican</option>
+                        <option>Chinese</option>
+                        <option>Indian</option>
+                    </select>
+                    <select class="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option>Rating</option>
+                        <option>5 Stars</option>
+                        <option>4 Stars</option>
+                        <option>3 Stars</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurant Listings Section -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-6 primary-color text-center">Popular Restaurants</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Restaurant Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw0fHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Restaurant 1" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">The Italian Place</h3>
+                        <p class="text-gray-700">Authentic Italian cuisine with a modern twist.</p>
+                        <div class="flex items-center mt-3">
+                            <i class="fas fa-star text-yellow-500 mr-1"></i>
+                            <span>4.5 (120+ ratings)</span>
+                        </div>
+                        <a href="restaurant-menu.html" class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300">View Menu</a>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwyfHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Restaurant 2" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Spice Route Indian Cuisine</h3>
+                        <p class="text-gray-700">Exquisite Indian dishes with rich flavors and aromatic spices.</p>
+                        <div class="flex items-center mt-3">
+                            <i class="fas fa-star text-yellow-500 mr-1"></i>
+                            <span>4.2 (90+ ratings)</span>
+                        </div>
+                        <a href="restaurant-menu.html" class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300">View Menu</a>
+                    </div>
+                </div>
+
+                <!-- Restaurant Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwzfHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Restaurant 3" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Taco Fiesta</h3>
+                        <p class="text-gray-700">Authentic Mexican street food with fresh ingredients.</p>
+                        <div class="flex items-center mt-3">
+                            <i class="fas fa-star text-yellow-500 mr-1"></i>
+                            <span>4.0 (75+ ratings)</span>
+                        </div>
+                        <a href="restaurant-menu.html" class="inline-block mt-4 bg-primary-color text-white py-2 px-4 rounded-full hover:bg-orange-600 transition duration-300">View Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-600">
+                &copy; 2024 Foodie. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

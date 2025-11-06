@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu - Foodie</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Roboto Font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #2C3E50;
+        }
+
+        .primary-color {
+            color: #FF5733;
+        }
+
+        .bg-primary-color {
+            background-color: #FF5733;
+        }
+
+        .accent-color {
+            color: #3498DB;
+        }
+
+        .bg-accent-color {
+            background-color: #3498DB;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto py-4 px-6 flex items-center justify-between">
+            <div class="text-2xl font-bold primary-color">
+                <i class="fas fa-utensils mr-2"></i>Foodie
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="home.html" class="hover:text-gray-700">Home</a>
+                <a href="#" class="hover:text-gray-700">Restaurants</a>
+                <a href="#" class="hover:text-gray-700">My Order</a>
+                <a href="#" class="bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">Sign Up</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-800 focus:outline-none focus:text-gray-800">
+                    <i class="fas fa-bars fa-2x"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden bg-gray-100 py-4 px-6">
+            <a href="home.html" class="block py-2 hover:text-gray-700">Home</a>
+            <a href="#" class="block py-2 hover:text-gray-700">Restaurants</a>
+            <a href="#" class="block py-2 hover:text-gray-700">My Order</a>
+            <a href="#" class="block py-2 hover:text-gray-700 bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Restaurant Information -->
+    <section class="container mx-auto mt-8 px-6">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw0fHxyZXN0YXVyYW50fGVufDB8fHx8MTc2MTgwODE2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+                    alt="Restaurant" class="w-24 h-24 rounded-full mr-4">
+                <div>
+                    <h1 class="text-3xl font-bold primary-color">Delicious Delights Restaurant</h1>
+                    <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>123 Main Street, Anytown</p>
+                    <p class="text-gray-600"><i class="fas fa-phone-alt mr-2"></i>(555) 123-4567</p>
+                    <p class="text-gray-600"><i class="fas fa-clock mr-2"></i>Open: 10:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+            <p class="text-gray-700">
+                Welcome to Delicious Delights, where we serve the most amazing food in town! Our chefs use only the
+                freshest ingredients to create dishes that will tantalize your taste buds.
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <main class="container mx-auto mt-8 px-6">
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-semibold primary-color mb-4"><i class="fas fa-star mr-2"></i>Appetizers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Appetizer Item 1 -->
+                <article class="border rounded-lg p-4">
+                    <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwxfHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Bruschetta" class="w-full h-48 object-cover rounded-md mb-2">
+                    <h3 class="text-xl font-semibold">Bruschetta</h3>
+                    <p class="text-gray-700">Toasted bread topped with fresh tomatoes, basil, and balsamic glaze.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold">$8.99</span>
+                        <button class="bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">
+                            <i class="fas fa-plus mr-2"></i>Add to Order
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Appetizer Item 2 -->
+                <article class="border rounded-lg p-4">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwyfHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Mozzarella Sticks" class="w-full h-48 object-cover rounded-md mb-2">
+                    <h3 class="text-xl font-semibold">Mozzarella Sticks</h3>
+                    <p class="text-gray-700">Deep-fried mozzarella sticks served with marinara sauce.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold">$7.99</span>
+                        <button class="bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">
+                            <i class="fas fa-plus mr-2"></i>Add to Order
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-semibold primary-color mb-4"><i class="fas fa-utensils mr-2"></i>Main Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Main Course Item 1 -->
+                <article class="border rounded-lg p-4">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHwzfHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Steak" class="w-full h-48 object-cover rounded-md mb-2">
+                    <h3 class="text-xl font-semibold">Grilled Steak</h3>
+                    <p class="text-gray-700">Juicy grilled steak served with mashed potatoes and asparagus.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold">$24.99</span>
+                        <button class="bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">
+                            <i class="fas fa-plus mr-2"></i>Add to Order
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Main Course Item 2 -->
+                <article class="border rounded-lg p-4">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw0fHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Pasta Carbonara" class="w-full h-48 object-cover rounded-md mb-2">
+                    <h3 class="text-xl font-semibold">Pasta Carbonara</h3>
+                    <p class="text-gray-700">Classic pasta carbonara with pancetta, eggs, and parmesan cheese.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold">$18.99</span>
+                        <button class="bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">
+                            <i class="fas fa-plus mr-2"></i>Add to Order
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-semibold primary-color mb-4"><i class="fas fa-birthday-cake mr-2"></i>Desserts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Dessert Item 1 -->
+                <article class="border rounded-lg p-4">
+                    <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw1fHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Chocolate Cake" class="w-full h-48 object-cover rounded-md mb-2">
+                    <h3 class="text-xl font-semibold">Chocolate Cake</h3>
+                    <p class="text-gray-700">Rich chocolate cake with chocolate frosting.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold">$9.99</span>
+                        <button class="bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">
+                            <i class="fas fa-plus mr-2"></i>Add to Order
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Dessert Item 2 -->
+                <article class="border rounded-lg p-4">
+                    <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MTgzODZ8MHwxfHNlYXJjaHw1fHxmb29kfGVufDB8fHx8MTc2MDk3MDk2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+                        alt="Ice Cream" class="w-full h-48 object-cover rounded-md mb-2">
+                    <h3 class="text-xl font-semibold">Ice Cream</h3>
+                    <p class="text-gray-700">Vanilla ice cream with chocolate syrup.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold">$5.99</span>
+                        <button class="bg-accent-color text-white py-2 px-4 rounded hover:bg-blue-600">
+                            <i class="fas fa-plus mr-2"></i>Add to Order
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 py-4 mt-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-600">
+                &copy; 2024 Foodie. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
